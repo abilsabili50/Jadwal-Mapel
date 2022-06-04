@@ -1,0 +1,3 @@
+~~~ NOTE ~~~
+buat database baru dengan nama jadwal_mapel
+import file sql kedalamnya
