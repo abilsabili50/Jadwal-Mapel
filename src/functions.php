@@ -1,10 +1,6 @@
 <?php
 
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "jadwal_mapel";
-$koneksi = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+include_once "../private/config.php";
 
 function tambah($data, $keys, $nama_tabel)
 {
@@ -49,4 +45,10 @@ function hapus($id, $nama_tabel, $key_id)
 	mysqli_query($koneksi, $query);
 
 	return mysqli_affected_rows($koneksi);
+}
+
+function cari($keyword, $nama_tabel, $column_name)
+{
+	$query = "SELECT * FROM $nama_tabel WHERE $column_name LIKE '%$keyword%'";
+	return $query;
 }

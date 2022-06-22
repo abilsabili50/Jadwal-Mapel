@@ -1,6 +1,6 @@
 <?php
   
-  include 'src/config.php';
+  include 'private/config.php';
 
   $totalGuru = sqlquery("SELECT COUNT(*) as 'total_guru' FROM guru_pengajar");
   $totalMurid = sqlquery("SELECT COUNT(*) as 'total_murid' FROM murid");

@@ -1,7 +1,6 @@
 <?php
   
-  include '../src/config.php';
-  include '../src/functions.php';
+  include_once '../src/functions.php';
 // digunakan untuk mengambil key pada db;
   $sqlKey = [];
   $nama_tabel = "guru_pengajar";

@@ -1,6 +1,5 @@
 <?php
   
-  include '../src/config.php';
   include '../src/functions.php';
 // digunakan untuk mengambil key pada db;
   $sqlKey = [];
