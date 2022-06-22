@@ -1,6 +1,6 @@
 <?php
 
-include '../src/functions.php';
+include_once "../src/functions.php";
 // digunakan untuk mengambil key pada db;
 $sqlKey = [];
 $nama_tabel = "murid";
@@ -10,7 +10,7 @@ $jumlahData = count(sqlquery("SELECT * FROM $nama_tabel"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = isset($_GET["hlm"]) ? $_GET["hlm"] : 1;
 $awalData = $jumlahDataPerHalaman * $halamanAktif - $jumlahDataPerHalaman;
-$results = sqlquery("SELECT * FROM murid LIMIT $awalData, $jumlahDataPerHalaman");
+$results = sqlquery("SELECT * FROM $nama_tabel LIMIT $awalData, $jumlahDataPerHalaman");
 
 if (isset($_GET["submitSearch"])) {
   $stringQuery = cari($_GET["keyword"], $nama_tabel, "NAMA_MURID");

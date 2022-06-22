@@ -16,3 +16,4 @@ function sqlquery($query)
 	}
 	return $rows;
 }
+?>

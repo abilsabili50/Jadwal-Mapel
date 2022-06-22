@@ -1,7 +1,6 @@
 <?php
 
-include '../../private/config.php';
-include '../../src/functions.php';
+include_once "../functions.php";
 // digunakan untuk mengambil key pada db;
 $sqlKey = [];
 $nama_tabel = "murid";

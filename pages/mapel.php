@@ -1,15 +1,27 @@
 <?php
 
-include '../src/functions.php';
+include_once "../src/functions.php";
 // digunakan untuk mengambil key pada db;
 $sqlKey = [];
 $nama_tabel = "mata_pelajaran";
-$results = sqlquery("SELECT * FROM mata_pelajaran");
+
+$jumlahDataPerHalaman = 5;
+$jumlahData = count(sqlquery("SELECT * FROM $nama_tabel"));
+$jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+$halamanAktif = isset($_GET["hlm"]) ? $_GET["hlm"] : 1;
+$awalData = $jumlahDataPerHalaman * $halamanAktif - $jumlahDataPerHalaman;
+$results = sqlquery("SELECT * FROM $nama_tabel LIMIT $awalData, $jumlahDataPerHalaman");
 
 if (isset($_GET["submitSearch"])) {
   $stringQuery = cari($_GET["keyword"], $nama_tabel, "NAMA_MAPEL");
-  $results = sqlquery($stringQuery);
+  $jumlahData = count(sqlquery($stringQuery));
+  $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+  $halamanAktif = isset($_GET["hlm"]) ? $_GET["hlm"] : 1;
+  $awalData = $jumlahDataPerHalaman * $halamanAktif - $jumlahDataPerHalaman;
+  $results = sqlquery($stringQuery . " LIMIT $awalData, $jumlahDataPerHalaman");
 }
+
+$params = isset($_GET["submitSearch"]) ? "keyword=" . $_GET["keyword"] . "&submitSearch=&" : "";
 
 foreach ($results as $result) {
   foreach ($result as $key => $val) {
@@ -78,6 +90,13 @@ function clickHapus()
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+  <!-- style pagination -->
+  <style>
+    a.disable {
+      pointer-events: none;
+      cursor: default;
+    }
+  </style>
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini">
@@ -253,7 +272,39 @@ function clickHapus()
           <!-- /.card-body -->
         </div>
         <!-- /.card -->
-
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <?php if ($halamanAktif > 1) : ?>
+                <a class="page-link text-white" href="?<?= $params; ?>hlm=<?= $halamanAktif - 1 ?>" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              <?php else : ?>
+                <a class="page-link text-white disable" href="?<?= $params; ?>hlm=<?= $halamanAktif - 1 ?>" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              <?php endif; ?>
+            </li>
+            <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+              <?php if ($i == $halamanAktif) : ?>
+                <li class="page-item active"><a href="?<?= $params; ?>hlm=<?= $i; ?>" class="page-link text-white"><?= $i; ?></a></li>
+              <?php else : ?>
+                <li class="page-item"><a href="?<?= $params; ?>hlm=<?= $i; ?>" class="page-link text-white"><?= $i; ?></a></li>
+              <?php endif; ?>
+            <?php endfor; ?>
+            <li class="page-item">
+              <?php if ($halamanAktif < $jumlahHalaman) : ?>
+                <a class="page-link text-white" href="?<?= $params; ?>hlm=<?= $halamanAktif + 1 ?>" aria-label="Previous">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              <?php else : ?>
+                <a class="page-link text-white disable" href="?<?= $params; ?>hlm=<?= $halamanAktif + 1 ?>" aria-label="Previous">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              <?php endif; ?>
+            </li>
+          </ul>
+        </nav>
       </section>
       <!-- /.content -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

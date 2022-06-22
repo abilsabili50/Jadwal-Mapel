@@ -1,11 +1,9 @@
 <?php
 
-require_once '../functions.php';
+include_once "../functions.php";
 // digunakan untuk mengambil key pada db;
 $sqlKey = [];
 $nama_tabel = "guru_pengajar";
-$id;
-$results;
 if (isset($_GET["id"])) {
   $id = $_GET["id"];
   $results = sqlquery("SELECT * FROM guru_pengajar WHERE IDGURU = '$id'");

@@ -1,6 +1,7 @@
 <?php
 
-require_once "../config.php";
+require_once(__DIR__."/../private/config.php");
+
 
 function tambah($data, $keys, $nama_tabel)
 {
