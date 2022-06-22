@@ -5,10 +5,10 @@ include '../src/functions.php';
 $sqlKey = [];
 $nama_tabel = "murid";
 
-$jumlahDataPerHalaman = 10;
-$jumlahData = count(sqlquery("SELECT * FROM murid"));
+$jumlahDataPerHalaman = 5;
+$jumlahData = count(sqlquery("SELECT * FROM $nama_tabel"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
-$halamanAktif = isset($_GET["page"]) ? $_GET["page"] : 1;
+$halamanAktif = isset($_GET["hlm"]) ? $_GET["hlm"] : 1;
 $awalData = $jumlahDataPerHalaman * $halamanAktif - $jumlahDataPerHalaman;
 $results = sqlquery("SELECT * FROM murid LIMIT $awalData, $jumlahDataPerHalaman");
 
@@ -21,7 +21,7 @@ if (isset($_GET["submitSearch"])) {
   $results = sqlquery($stringQuery . " LIMIT $awalData, $jumlahDataPerHalaman");
 }
 
-$params = isset($_GET["submitSearch"]) ? "keyword=" . $_GET["keyword"] . "&cari=&" : "";
+$params = isset($_GET["submitSearch"]) ? "keyword=" . $_GET["keyword"] . "&submitSearch=&" : "";
 
 foreach ($results as $result) {
   foreach ($result as $key => $val) {
@@ -91,6 +91,7 @@ function clickHapus()
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+  <!-- style pagination -->
   <style>
     a.disable {
       pointer-events: none;
@@ -285,29 +286,29 @@ function clickHapus()
           <ul class="pagination">
             <li class="page-item">
               <?php if ($halamanAktif > 1) : ?>
-                <a class="page-link text-white" href="?<?= $params; ?>page=<?= $halamanAktif - 1 ?>" aria-label="Previous">
+                <a class="page-link text-white" href="?<?= $params; ?>hlm=<?= $halamanAktif - 1 ?>" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               <?php else : ?>
-                <a class="page-link text-white disable" href="?<?= $params; ?>page=<?= $halamanAktif - 1 ?>" aria-label="Previous">
+                <a class="page-link text-white disable" href="?<?= $params; ?>hlm=<?= $halamanAktif - 1 ?>" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               <?php endif; ?>
             </li>
             <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
               <?php if ($i == $halamanAktif) : ?>
-                <li class="page-item active"><a href="?<?= $params; ?>page=<?= $i; ?>" class="page-link text-white"><?= $i; ?></a></li>
+                <li class="page-item active"><a href="?<?= $params; ?>hlm=<?= $i; ?>" class="page-link text-white"><?= $i; ?></a></li>
               <?php else : ?>
-                <li class="page-item"><a href="?<?= $params; ?>page=<?= $i; ?>" class="page-link text-white"><?= $i; ?></a></li>
+                <li class="page-item"><a href="?<?= $params; ?>hlm=<?= $i; ?>" class="page-link text-white"><?= $i; ?></a></li>
               <?php endif; ?>
             <?php endfor; ?>
             <li class="page-item">
               <?php if ($halamanAktif < $jumlahHalaman) : ?>
-                <a class="page-link text-white" href="?<?= $params; ?>page=<?= $halamanAktif + 1 ?>" aria-label="Previous">
+                <a class="page-link text-white" href="?<?= $params; ?>hlm=<?= $halamanAktif + 1 ?>" aria-label="Previous">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               <?php else : ?>
-                <a class="page-link text-white disable" href="?<?= $params; ?>page=<?= $halamanAktif + 1 ?>" aria-label="Previous">
+                <a class="page-link text-white disable" href="?<?= $params; ?>hlm=<?= $halamanAktif + 1 ?>" aria-label="Previous">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               <?php endif; ?>

@@ -1,6 +1,6 @@
 <?php
 
-include_once "../private/config.php";
+require_once "../config.php";
 
 function tambah($data, $keys, $nama_tabel)
 {
