@@ -3,7 +3,7 @@
 	$dbhost = "localhost";
 	$dbuser = "root";
 	$dbpass = "";
-	$dbname = "jadwal_mapel";
+	$dbname = "mapel_baru";
 	$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 	function sqlquery($query){
