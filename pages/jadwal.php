@@ -5,6 +5,12 @@ include '../src/functions.php';
 $sqlKey = [];
 $results = sqlquery("SELECT * FROM jadwal_pelajaran");
 $nama_tabel = "jadwal_pelajaran";
+
+if (isset($_GET["submitSearch"])) {
+  $stringQuery = cari($_GET["keyword"], $nama_tabel, "IDJADWAL");
+  $results = sqlquery($stringQuery);
+}
+
 foreach ($results as $result) {
   foreach ($result as $key => $val) {
     $sqlKey[] = $key;
@@ -186,7 +192,18 @@ $mapel = sqlquery("SELECT * FROM mata_pelajaran");
 
       <!-- Main content -->
       <section class="content">
-
+        <form action="" method="get">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-11">
+                <input type="search" class="form-control" id="cari" name="keyword" placeholder="Search by Name" autofocus>
+              </div>
+              <div class="col-md-1">
+                <button type="submit" name="submitSearch" class="btn btn-info">Cari</button>
+              </div>
+            </div>
+          </div>
+        </form>
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
