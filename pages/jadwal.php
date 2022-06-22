@@ -102,6 +102,10 @@ $mapel = sqlquery("SELECT * FROM mata_pelajaran");
       cursor: default;
     }
   </style>
+  <!-- jQuery -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini">
@@ -215,7 +219,7 @@ $mapel = sqlquery("SELECT * FROM mata_pelajaran");
           <div class="form-group">
             <div class="row">
               <div class="col-md-11">
-                <input type="search" class="form-control" id="cari" name="keyword" placeholder="Search by Name" autofocus>
+                <input type="search" class="form-control" id="cariJadwal" name="keyword" placeholder="Search by Name" autofocus>
               </div>
               <div class="col-md-1">
                 <button type="submit" name="submitSearch" class="btn btn-info">Cari</button>
@@ -408,14 +412,14 @@ $mapel = sqlquery("SELECT * FROM mata_pelajaran");
   </div>
   <!-- ./wrapper -->
 
-  <!-- jQuery -->
-  <script src="../plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../dist/js/demo.js"></script>
+  <!-- script autocomplete -->
+  <script src="../dist/js/script.js"></script>
 </body>
 
 </html>
